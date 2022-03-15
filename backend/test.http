@@ -1,0 +1,10 @@
+POST http://localhost:4000/app/membre
+Content-Type: application/json
+
+{
+"nomMembre":"DESCHAMPS",
+"prenomMembre":"Didier",
+"dateNaissance":"01/02/2000",
+"adresseMembre":"Rue de la gare 50, Namur"
+}
+
