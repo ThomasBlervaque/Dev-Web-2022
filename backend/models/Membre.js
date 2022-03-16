@@ -21,4 +21,4 @@ const membreTemplate = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Rock_and_Troll', membreTemplate)
+module.exports = mongoose.model('rock_and_trolls', membreTemplate)
