@@ -1,21 +1,28 @@
+const mongoose = require('mongoose')
 const  express = require("express")
-const membreTemplateCopy = require('../models/Membre')
 const router = express.Router()
+const connexionTemplateCopy = require("../models/Connexion")
+const   bcrypt = require('bcrypt')
 
-router.post('/membre', (request, response )=>{
-    const Membre = new membreTemplateCopy({
-        nomMembre: request.body.nomMembre,
-        prenomMembre:request.prenomMembre,
-        dateNaissance:request.dateNaissance,
-        adresseMembre:request.address
+
+router.post('/connexion', async (request, response, next) => {
+    const saltPassword = await bcrypt.genSalt(10)
+    const securePassword = await bcrypt.hash(request.body.password, saltPassword)
+
+
+    const connect = new connexionTemplateCopy({
+        ...request.body,
+        password:securePassword
     })
-    Membre.save()
-        .then(data =>{
+    connect.save()
+        .then(data => {
             response.json(data)
-        })
-        .catch(error =>{
-            response.json(error)
-        })
+        }).catch(error => {
+        response.json(error)
+    })
+
+
 })
+
 
 module.exports = router

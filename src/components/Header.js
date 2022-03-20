@@ -8,6 +8,7 @@ function Header(){
             <Link to='/lineUp'> Line-up </Link>
             <Link to='/achat-ticket'> Achat Ticket </Link>
             <Link to='/contact'> Contact </Link>
+            <Link to='/connexion'> Connexion </Link>
         </nav>
     )
 }

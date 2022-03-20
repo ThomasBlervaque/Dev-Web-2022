@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import LineUp from "./pages/LineUp";
 import Contact from "./pages/Contact"
 import ShowGroupes from "./pages/ShowGroupes";
+import Connexion from "./pages/Connexion";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Route path='/lineUp' element={<LineUp/>}/>
         <Route path='/contact' element={<Contact/>}/>
         <Route path='/groupes'element={<ShowGroupes/>}/>
+        <Route path='/connexion'element={<Connexion/>}/>
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
