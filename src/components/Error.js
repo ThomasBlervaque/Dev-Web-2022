@@ -1,3 +1,5 @@
+//Fonction qui permet d'afficher que la page n'existe pas
+
 function Error(){
     return(
         <div>

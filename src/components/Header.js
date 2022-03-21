@@ -1,6 +1,8 @@
 import {Link} from "react-router-dom";
 import '../styles/Header.css'
 
+
+//Fonction qui définie l'en tête de la page principale
 function Header(){
     return(
         <nav className='header'>

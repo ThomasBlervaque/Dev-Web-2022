@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// Déclaration du schéma de la structure de la table d'un utilisateur pour la connexion
 
 const connexionTemplate = new mongoose.Schema({
     fullName:{

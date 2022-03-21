@@ -1,6 +1,9 @@
 import main from '../assets/main.png'
 import '../styles/Home.css'
 
+
+// Fonction pour la page  principale
+
 function Home(){
     return(
     <div>

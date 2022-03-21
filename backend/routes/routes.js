@@ -4,15 +4,15 @@ const router = express.Router()
 const connexionTemplateCopy = require("../models/Connexion")
 const   bcrypt = require('bcrypt')
 
-
+// Requête post pour l'insertion des données
 router.post('/connexion', async (request, response, next) => {
-    const saltPassword = await bcrypt.genSalt(10)
-    const securePassword = await bcrypt.hash(request.body.password, saltPassword)
+    const saltPassword = await bcrypt.genSalt(10) // Utilisation du sel pour le mot de passe
+    const securePassword = await bcrypt.hash(request.body.password, saltPassword) // crytage du mot de passe
 
 
     const connect = new connexionTemplateCopy({
         ...request.body,
-        password:securePassword
+        password:securePassword // enregistre le mot de passe crypté
     })
     connect.save()
         .then(data => {

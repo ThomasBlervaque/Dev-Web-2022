@@ -9,6 +9,8 @@ import  The_Spunboys from '../assets/The_Spunboys.png'
 import  The_Tone_Stellars from '../assets/The_Tone_Stellars.png'
 import '../styles/ShowGroupes.css'
 
+// Fonction pour la page  qui affiches les groupes
+
 function ShowGroupes(){
     return(
         <div>
