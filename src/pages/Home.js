@@ -8,7 +8,7 @@ function Home(){
     return(
     <div>
         <banner>
-           <img className='main-page-image' alt="photo page d\'accueil" src={main} alt="logo principal d'accueil"/>
+           <img className='main-page-image' alt="photo page d\'accueil" src={main}/>
         </banner>
 
         <div className='text-description'>
