@@ -14,7 +14,6 @@ import '../styles/ShowGroupes.css'
 function ShowGroupes(){
     return(
         <div>
-
             <ul>
                 <li> <img className='image-group'  src={AlexPaquette} alt='image AlexPaquette band'/> <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                     A accusamus aliquam consequuntur eos ipsum laboriosam nisi recusandae rerum, velit voluptatibus? Debitis molestias quibusdam ratione ullam.</p> </li>
