@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
+import { Form, FormGroup, Button, Input} from "reactstrap";
+import {Link} from "react-router-dom";
 
 // Page de connexion utilisateur
 
-class Connexion extends  Component{
+class AddUser extends  Component{
   constructor() {
     super()
     this.state ={
@@ -67,40 +69,42 @@ class Connexion extends  Component{
 
   render() {
     return(
-        <div>
+        <div className="form-connexion">
           <div className='container'>
             <div className='form-div'>
-              <form onSubmit={this.onSubmit}>
-                <input type='text'
+              <Form onSubmit={this.onSubmit}>
+                <FormGroup>
+                  <Input type='text'
                        placeholder='Full Name'
                        onChange={this.changeFullName}
                        value={this.state.fullName}
                        className='form-control from-group'/>
-                <input type='text'
+                <Input type='text'
                        placeholder='Username'
                        onChange={this.changeUsername}
                        value={this.state.username}
                        className='form-control from-group'
                 />
-                <input type='text'
+                <Input type='text'
                        placeholder='E-mail'
                        onChange={this.changeEmail}
                        value={this.state.email}
                        className='form-control from-group'
                 />
 
-                <input type='password'
+                <Input type='password'
                        placeholder='Mot de passe'
                        onChange={this.changePassword}
                        value={this.state.password}
                        className='form-control from-group'
                 />
 
-                <input type='submit'
+                <Button type='submit' Submit
                        className='btn btn-danger btn-block'
-                       value='Submit'
-                />
-              </form>
+                > Enregistrer</Button>
+                <Link to="/" className = "btn btn-danger m1-2"> Supprimer</Link>
+                </FormGroup>
+              </Form>
 
             </div>
           </div>
@@ -110,4 +114,4 @@ class Connexion extends  Component{
   }
 }
 
-export  default  Connexion
+export  default  AddUser

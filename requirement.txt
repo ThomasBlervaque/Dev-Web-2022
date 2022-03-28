@@ -12,3 +12,5 @@ Pour le frontend
 "react-router-dom",
 "axios",
 "bootstrap"
+"reactstrap"
+"uuid"
