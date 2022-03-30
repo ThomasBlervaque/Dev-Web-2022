@@ -4,10 +4,12 @@ import '../styles/Header.css'
 function Header(){
     return(
         <nav className='header'>
-            <Link to='/'> Accueil</Link>
-            <Link to='/lineUp'> Line-up </Link>
-            <Link to='/achat-ticket'> Achat Ticket </Link>
-            <Link to='/user'> Utilisateur </Link>
+            <ul>
+                <li><Link to='/'> Accueil</Link></li>
+                <li><Link to='/lineUp'> Line-up </Link></li>
+                <li><Link to='/achat-ticket'> Achat Ticket </Link></li>
+                <li><Link to='/user'> Utilisateur </Link></li>
+            </ul>
         </nav>
     )
 }

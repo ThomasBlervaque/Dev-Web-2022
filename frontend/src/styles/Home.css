@@ -1,9 +1,29 @@
 .main-page-image{
-    height: 400px;
-    width: 1500px;
+    height: 3000px;
+    width: 100%;
+
 }
 
 .div-image{
     height: 200px;
     width: 500px;
 }
+
+#WelcomeTextspace {
+    background-color: rgb(255, 94, 0);
+    padding: 0% 10% 0% 10% ;
+    height: 100%;
+    width: 80%;
+    position: absolute;
+    top:160%;
+    left:10%;
+    border-radius: 10px;
+}
+
+#WelcomeTextspace span{
+    font-size: 150%;
+    color:rgb(124, 36, 4) ;
+    margin-top: 10%; /* (à fix, ne marche pas) but etant de decoler le text du haut du cadre*/
+}
+
+
