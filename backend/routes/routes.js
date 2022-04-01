@@ -9,7 +9,6 @@ router.post('/connexion', async (request, response, next) => {
     const saltPassword = await bcrypt.genSalt(10) // Utilisation du sel pour le mot de passe
     const securePassword = await bcrypt.hash(request.body.password, saltPassword) // crytage du mot de passe
 
-
     const connect = new connexionTemplateCopy({
         ...request.body,  // spread : pour tous les élement du request.body
         password:securePassword // enregistre le mot de passe crypté
@@ -28,7 +27,6 @@ router.get('/connexion/list', (req, res, next) => {
     .then(thing => res.status(200).json(thing))
     .catch(error => res.status(404).json({ error }));
 });
-
 
 // Supression d'un utilisateur
 router.delete('/connexion/delete/:id', (req, res, next) => {
