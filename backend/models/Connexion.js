@@ -26,4 +26,4 @@ const connexionTemplate = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('rock_and_troll', connexionTemplate)
+module.exports = mongoose.model('Connexion', connexionTemplate, 'userConnexion')
