@@ -1,13 +1,4 @@
 
-
-POST http://localhost:4000/createClient
+GET http://localhost:4000/showAllBand
 content-Type: application/json
 
-{
-      "email": "fafame@yahoo.fr",
-      "clientName":" FAFAME ",
-      "firstName": "Benoit",
-      "birthDay": "1990-01-02",
-      "password": "fafame"
-
-}

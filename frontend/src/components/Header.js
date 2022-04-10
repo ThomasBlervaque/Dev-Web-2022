@@ -9,7 +9,8 @@ function Header(){
                 <li><Link to='/lineUp'> Line-up </Link></li>
                 <li><Link to='/achat-ticket'> Achat Ticket </Link></li>
                 <li><Link to='/user'> Utilisateur </Link></li>
-                <li><Link to='/person'> Personne </Link> </li>
+                <li><Link to='/admin'> Admin </Link> </li>
+
             </ul>
         </nav>
     )

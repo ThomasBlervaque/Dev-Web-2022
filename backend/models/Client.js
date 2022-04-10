@@ -7,11 +7,11 @@ const templateClient= new mongoose.Schema({
         type: String,
         required: true,
     },
-    clientName:{
+    fullName:{
         type: String,
         required: true
     },
-     firstName:{
+     userName:{
         type: String,
         required: true
     },
@@ -20,6 +20,10 @@ const templateClient= new mongoose.Schema({
         required: true
     },
     password:{
+        type: String,
+        required: true
+    },
+    confirmPassword:{
         type: String,
         required: true
     }

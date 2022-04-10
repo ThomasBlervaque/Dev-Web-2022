@@ -9,12 +9,12 @@ router.post('/connexion', async (request, response, next) => {
     const securePassword = await bcrypt.hash(request.body.password, saltPassword) // crytage du mot de passe
 
     const connect = new connexionTemplateCopy({
-        ...request.body,  // spread : pour tous les élement du request.body
+        ...request.body,  // spread : pour tous les élements du request.body
         password:securePassword // enregistre le mot de passe crypté
 
     })
-    console.log(securePassword)
-    console.log(connect)
+    console.log("Le mot de passe est "+ securePassword)
+    console.log("Bonjour")
     connect.save()
         .then(data => {
             response.json(data)

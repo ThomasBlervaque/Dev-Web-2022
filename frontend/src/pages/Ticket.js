@@ -4,7 +4,7 @@ import axios from 'axios'
 import {Form, FormGroup, Button, Input} from "reactstrap";
 import {Link} from "react-router-dom";
 
-// Page de création d'une personne
+// Page de création d'une reservation
 
 class Ticket extends  Component{
   constructor(props) {
@@ -60,7 +60,7 @@ class Ticket extends  Component{
       birthDay:this.state.birthDay,
       typePerson: this.state.typePerson
     }
-    axios.post('http://localhost:4000/createPerson',registered)
+    axios.post('http://localhost:4000/createTicket',registered)
         .then(response => console.log(response.data))
         // window.location = '/' la page sur laquelle  on veut rediriger après la connexion
         this.setState({
@@ -88,4 +88,4 @@ class Ticket extends  Component{
   }
 }
 
-export  default  Ticket
+export default Ticket

@@ -69,11 +69,7 @@ class AddUser extends  Component{
 
   render() {
     return(
-        <div className="form-connexion">
-          <div className='container'>
-            <div className='form-div'>
               <Form onSubmit={this.onSubmit}>
-                <FormGroup>
                   <Input type='text'
                        placeholder='Full Name'
                        onChange={this.changeFullName}
@@ -103,13 +99,7 @@ class AddUser extends  Component{
                        className='btn btn-danger btn-block'
                 > Enregistrer</Button>
                 <Link to="/" className = "btn btn-danger m1-2"> Supprimer</Link>
-                </FormGroup>
               </Form>
-
-            </div>
-          </div>
-
-        </div>
     )
   }
 }

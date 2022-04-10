@@ -1,31 +1,39 @@
-const mongoose = require('mongoose')
 const  express = require("express")
 const routerClient = express.Router()
 const Client = require("../models/Client")
 const bcrypt = require("bcrypt");
+const {error} = require("rest-client");
+const {json} = require("express");
 
-
-routerClient.post('/createClient',async(request, response, next)=>{
+routerClient.post('/createClient',async(request,
+                                        response, next)=>{
     const saltPassword = await bcrypt.genSalt(10) // Utilisation du sel pour le mot de passe
     const securePassword = await bcrypt.hash(request.body.password, saltPassword) // crytage du mot de passe
-
-
+    const secureConfirmPassword = await bcrypt.hash(request.body.confirmPassword, saltPassword) // crytage du mot de passe
+    const clientMail = ""
     const client = new Client({
         email: request.body.email,
-        clientName: request.body.clientName,
-        firstName: request.body.firstName,
+        fullName: request.body.fullName,
+        userName: request.body.userName,
         birthDay: request.body.birthDay,
-        password: request.body.password,
-        password:securePassword // enregistre le mot de passe crypté
+        confirmPassword: secureConfirmPassword,
+        password: securePassword,
+        clientMail : request.body.email
     })
-    client.save()
-        .then(()=>{
-            response.status(201).json({message: "Post saved succefully !"})
-        })
-        .catch((error)=>{
-            response.status(400).json({error:error})
-        })
-    }
+       /*if (Client.find({ "email": clientMail }).count()<0) {*/
+           client.save()
+                 .then(()=>{
+                        response.status(201).json({message: "Post saved succefully !"})
+                    })
+                    .catch((error)=>{
+                        response.status(400).json({error:error})
+                    })
+
+       /*}
+       else {
+             json({message: "L'utilisateur existe déjà"})
+       }*/
+   }
 )
 routerClient.get ('/showOneClient/:id',(request, response, next)=>{
     Client.findOne({_id:request.params.id})
@@ -39,10 +47,11 @@ routerClient.get ('/showOneClient/:id',(request, response, next)=>{
 routerClient.put('/modify/:id',(request,response, next)=>{
     const client = new Client({
         _id: request.params.id,
-        clientName: request.body.personName,
-        firstName: request.body.firstName,
+        fullName: request.body.fullName,
+        userName: request.body.userName,
         birthDay: request.body.birthDay,
-        password: request.body.password
+        password: request.body.password,
+        confirmPassword: request.body.confirmPassword,
 
     })
     Client.updateOne({_id:request.params.id}, client)

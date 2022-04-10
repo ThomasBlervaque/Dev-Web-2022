@@ -2,23 +2,28 @@ import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import {Form, FormGroup, Button, Input} from "reactstrap";
-import {Link} from "react-router-dom";
+import '../styles/Client.css'
 
-// Page de création d'une personne
 
-class AddPerson extends  Component{
-  constructor(props) {
-    super(props)
+// Page de création d'un utilisateur
+
+class AddClient extends  Component{
+  constructor() {
+    super()
     this.state ={
       email: '',
-      personName: '',
-      firstName:'',
+      fullName: '',
+      userName:'',
       birthDay:'',
+      password:'',
+      confirmPassword:''
     }
     this.changeEmail = this.changeEmail.bind(this)
-    this.changePersonName = this.changePersonName.bind(this)
-    this.changeFirstName = this.changeFirstName.bind(this)
+    this.changeFullName = this.changeFullName.bind(this)
+    this.changeUserName = this.changeUserName.bind(this)
     this.changeBirthDay = this.changeBirthDay.bind(this)
+    //this.changePassword = this.changePassword(this)
+    //this.changeConfirmPassword = this.changeConfirmPassword(this)
 
     this.onSubmit= this.onSubmit.bind(this)
   }
@@ -27,12 +32,12 @@ class AddPerson extends  Component{
       email:event.target.value
     })
   }
-  changePersonName(event){
+  changeFullName(event){
     this.setState({
       personName:event.target.value
     })
   }
-  changeFirstName(event){
+  changeUserName(event){
     this.setState({
       firstName:event.target.value
     })
@@ -44,22 +49,38 @@ class AddPerson extends  Component{
     })
   }
 
+  changePassword(event){
+    this.setState({
+      password:event.target.value
+    })
+  }
+
+  changeConfirmPassword(event){
+    this.setState({
+      confirmPassword:event.target.value
+    })
+  }
+
   onSubmit(event){
     event.preventDefault()
     const registered = {
       email: this.state.email,
-      personName: this.state.personName,
-      firstName: this.state.firstName,
+      fullName: this.state.personName,
+      userName: this.state.firstName,
       birthDay:this.state.birthDay,
+      password:this.state.password,
+      confirmPassword:this.state.confirmPassword
     }
     axios.post('http://localhost:4000/createClient',registered)
         .then(response => console.log(response.data))
         // window.location = '/' la page sur laquelle  on veut rediriger après la connexion
         this.setState({
           email:'',
-          personName:'',
-          firstName:'',
-          birthDay:''
+          fullName:'',
+          userName:'',
+          birthDay:'',
+          password:'',
+          confirmPassword:''
         })
   }
 
@@ -77,14 +98,14 @@ class AddPerson extends  Component{
                        className='form-control from-group'
                   />
                   <Input type='text'
-                       placeholder='Name'
-                       onChange={this.changePersonName}
+                       placeholder='fullName'
+                       onChange={this.changeFullName}
                        value={this.state.personName}
                        className='form-control from-group'
                   />
                 <Input type='text'
-                       placeholder='firstName'
-                       onChange={this.changeFirstName}
+                       placeholder='userName'
+                       onChange={this.changeUserName}
                        value={this.state.firstName}
                        className='form-control from-group'
                 />
@@ -94,10 +115,26 @@ class AddPerson extends  Component{
                        value={this.state.birthDay}
                        className='form-control from-group'
                 />
-                <Button type='submit' Submit
-                       className='btn btn-danger btn-block'
-                > Enregistrer</Button>
-                <Link to="/" className = "btn btn-danger m1-2"> Supprimer</Link>
+
+                <Input type='password'
+                       placeholder='password'
+                       onChange={this.c}
+                       value={this.state.password}
+                       className='form-control from-group'
+                />
+
+                <Input type='password'
+                       placeholder='confirm password'
+                       onChange={this.c}
+                       value={this.state.confirmPassword}
+                       className='form-control from-group'
+                />
+
+                <fieldset className='btn-confirm'>
+                  <Button type='submit' Submit
+                       className='btn btn-danger btn-block'> Enregistrer
+                  </Button>
+                </fieldset>
                 </FormGroup>
               </Form>
             </div>
@@ -108,4 +145,4 @@ class AddPerson extends  Component{
   }
 }
 
-export  default  AddPerson
+export  default  AddClient

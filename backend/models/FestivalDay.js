@@ -9,31 +9,14 @@ const templateFestivalDay = new mongoose.Schema({
         type: Number,
         required: true
     },
-    Band:[
-        {
-            nameBand:{
-                type: String,
-                required: true
-            },
-            numberMember:{
-                type: Number,
-                required: true
-            },
-            creationYear:{
-                type: Date,
-                required: true
-            },
-            history:{
-                type: String,
-                required: false
-            },
-            photo:{
-                type:String,
-                required: true
-            }
-        }
-    ]
-
+    price:{
+        type:Number,
+        required:true
+    },
+    Bands:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Band"
+    }]
 })
 
 module.exports = mongoose.model('FestivalDay', templateFestivalDay, 'FestivalDay')

@@ -7,12 +7,10 @@ routerFestivalDay.post('/createFestivalDay',(request, response, next)=>{
     const dayFestival = new FestivalDay({
         dateFestival: request.body.dateFestival,
         numberScene: request.body.numberScene,
-        nameBand: request.body.nameBand,
-        numberMember: request.body.numberMember,
-        creationYear: request.body.creationYear,
-        history: request.body.history,
-        photo: request.body.photo
+        price:request.body.price,
+        Band:request.body.Band
     })
+    console.log(dayFestival)
     dayFestival.save()
         .then(()=>{
             response.status(201).json({message: "Post saved succefully !"})
@@ -37,11 +35,8 @@ routerFestivalDay.put('/modify/:id',(request,response, next)=>{
         _id: request.params.id,
         dateFestival: request.body.dateFestival,
         numberScene: request.body.numberScene,
-        nameBand: request.body.nameBand,
-        numberMember: request.body.numberMember,
-        creationYear: request.body.creationYear,
-        history: request.body.history,
-        photo: request.body.photo
+        Band:request.body.Band
+
     })
     FestivalDay.updateOne({_id:request.params.id}, festivalDay)
     .then(()=>{

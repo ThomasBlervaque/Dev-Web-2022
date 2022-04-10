@@ -7,17 +7,19 @@ const routeConnexion = require('./routes/connexionRoute') // lien vers la route 
 const routeClient = require('./routes/clientRoute')
 const routeReservation = require('./routes/Reservation')
 const routeFestivalDay = require('./routes/festivalDayRoute')
+const routeBand = require('./routes/bandRoute')
 const cors = require('cors')
 
 
 
 dotenv.config()
 // AddUser de la base de donnée via le fichier .env
-mongoose.connect(process.env.ACCESS, () =>console.log("Database connected"))
+mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
 app.use(express.json()) // Convertir les données au formats JSON
 app.use(cors())
 app.use('/',routeConnexion) //Middelware Function permettant d'avoir acces à la requête et sa réponse
 app.use('/',routeClient)
 app.use('/',routeFestivalDay)
 app.use('/',routeReservation)
+app.use('/',routeBand)
 app.listen(4000, ()=>console.log("Server is up and running")) // Indique le port sur lequel on a la réponse
