@@ -1,4 +1,10 @@
 .image-group{
-    height: 500px;
-    width: 500px;
+    height: 400px;
+    width: 400px;
+}
+
+.SceneRock{
+    position: absolute;
+    top: 108px;
+    left: 800px;
 }
