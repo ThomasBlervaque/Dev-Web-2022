@@ -1,4 +1,3 @@
 
-GET http://localhost:4000/showAllBand
+GET http://localhost:4000/showAllFestivalDays+
 content-Type: application/json
-

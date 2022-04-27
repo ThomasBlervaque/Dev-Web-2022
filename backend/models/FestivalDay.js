@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Band = require('../models/Band')
 
 const templateFestivalDay = new mongoose.Schema({
     dateFestival:{
@@ -13,10 +14,7 @@ const templateFestivalDay = new mongoose.Schema({
         type:Number,
         required:true
     },
-    Bands:[{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Band"
-    }]
+    Bands:[{type: mongoose.Schema.Types.ObjectId, ref:"Band"}],
 })
 
 module.exports = mongoose.model('FestivalDay', templateFestivalDay, 'FestivalDay')

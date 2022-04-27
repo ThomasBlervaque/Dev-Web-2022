@@ -1,34 +1,54 @@
 const  express = require("express")
 const routerBand = express.Router()
-const Band = require("../models/Band")
-const bcrypt = require("bcrypt");
-const {error} = require("rest-client");
-const {json} = require("express");
+let Band = require("../models/Band")
 
-routerBand.post('/createBand',async(request,
+let multer = require('multer')
+const path = require("express");
+
+let storage = multer.diskStorage({
+    destination : (request, file, cb) =>{
+        cb(null, 'uploads')
+    },
+    filename: (request, file, cb) =>
+        cb(null, file.filename + '-'+ Date.now())
+})
+let upload = multer({storage:storage})
+
+/*routerBand.post('/createBand', Band.single('image'), async(request,
                                         response, next)=>{
     const band = new Band({
         nameBand: request.body.nameBand,
         numberMember: request.body.numberMember,
         creationYear: request.body.creationYear,
-        history: request.body.history
-
+        history: request.body.history,
+        img:{
+            data : fs.readFileSync(path.join(__dirname + 'uploads' + request.file.filename)),
+            contentType: 'image/png'
+        }
     })
-       /*if (Band.find({ "email": clientMail }).count()<0) {*/
-           band.save()
+    Band.create(obj,(err, item) =>{
+      if (err){
+          console.log(err)
+      }
+      else {
+         band.save()
                  .then(()=>{
                         response.status(201).json({message: "Post saved succefully !"})
                     })
                     .catch((error)=>{
                         response.status(400).json({error:error})
                     })
+      }
+    })
+       ** (Band.find({ "email": clientMail }).count()<0) {**
 
-       /*}
+
+       **}
        else {
              json({message: "L'utilisateur existe déjà"})
-       }*/
+       }**
    }
-)
+)*/
 
 routerBand.put('/modify/:id',(request,response, next)=>{
     const band = new Band({

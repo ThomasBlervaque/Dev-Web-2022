@@ -16,6 +16,10 @@ const templateBand = new mongoose.Schema({
             history:{
                 type: String,
                 required: false
+            },
+            img:{
+                data:Buffer,
+                contentType: String
             }
 })
 

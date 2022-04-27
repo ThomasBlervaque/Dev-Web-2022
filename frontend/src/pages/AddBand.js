@@ -52,7 +52,7 @@ class AddBand extends Component{
         render(){
             return (<div>
                 <div className='form-div'>
-              <Form onSubmit={this.onSubmit}>
+              <Form onSubmit={this.onSubmit} encType='multipart/form-data'>
                   <FormGroup>
                         <Input type='text'
                                placeholder='name of band'
@@ -78,7 +78,11 @@ class AddBand extends Component{
                                value={this.state.history}
                                className='form-control from-group'
                         />
-
+                      <div>
+                          <label htmlFor="image">Upload Image</label>
+                          <input type="file" id="image"
+                                 name="image" value="" required/>
+                      </div>
                         <Button type='submit' Submit
                                className='btn btn-danger btn-block'
                         > Enregistrer</Button>

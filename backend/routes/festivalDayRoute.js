@@ -8,7 +8,7 @@ routerFestivalDay.post('/createFestivalDay',(request, response, next)=>{
         dateFestival: request.body.dateFestival,
         numberScene: request.body.numberScene,
         price:request.body.price,
-        Band:request.body.Band
+        BandSchema:request.body.Band
     })
     console.log(dayFestival)
     dayFestival.save()
@@ -35,7 +35,7 @@ routerFestivalDay.put('/modify/:id',(request,response, next)=>{
         _id: request.params.id,
         dateFestival: request.body.dateFestival,
         numberScene: request.body.numberScene,
-        Band:request.body.Band
+        BandSchema:request.body.Band
 
     })
     FestivalDay.updateOne({_id:request.params.id}, festivalDay)
@@ -47,7 +47,7 @@ routerFestivalDay.put('/modify/:id',(request,response, next)=>{
 )
 
 routerFestivalDay.delete('/delete/:id',(request, response, next)=>{
-    Client.deleteOne({_id:request.params.id})
+    FestivalDay.deleteOne({_id:request.params.id})
         .then(()=>{
             response.status(200).json({message:"Deleted !"})
         })
@@ -56,10 +56,10 @@ routerFestivalDay.delete('/delete/:id',(request, response, next)=>{
     }
 )
 
-routerFestivalDay.get('/showAllPerson', (request,response,next)=>{
-    Client.find()
-        .then((person)=>{
-            response.status(200).json(person)})
+routerFestivalDay.get('/showAllFestivalDays', (request,response,next)=>{
+    FestivalDay.find()
+        .then((festivalDay)=>{
+            response.status(200).json(festivalDay)})
         .catch((error)=>{
             response.status(400).json({error:error})
         })

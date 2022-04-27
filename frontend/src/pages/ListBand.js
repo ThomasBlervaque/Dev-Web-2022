@@ -3,11 +3,13 @@ import axios from "axios";
 
 let listBand
 axios.get('http://localhost:4000/showAllBand').then(response => {
-    listBand = response.data
-    console.log(listBand);
+    //console.log(listBand);
+    listBand = JSON.stringify(response.data)
+    //console.log(listBand)
 
 });
-console.log(listBand)
+//console.log(JSON.stringify(listBand))
+console.log('enfin me voici '+ listBand)
 
 function BandTab({band}){
     return <table className='table'>
