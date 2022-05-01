@@ -1,16 +1,16 @@
 import React from "react";
+import axios from "axios";
 
 class Inscription extends React.Component {
 
     constructor (props){
         super(props)
         this.state = {
-            nom : '',
-            prenom : '',
-            mail : '',
-            tel : '',
-            mdp : '',
-            confmdp : '',
+            fullName : '',
+            userName : '',
+            email : '',
+            password : '',
+            confirmPassword : '',
             mailValide : false,
             mdpValide : false,
         }
@@ -32,11 +32,11 @@ class Inscription extends React.Component {
         console.log(this.state)
         if(this.state.mailValide == true && this.state.mdpValide == true){
                 console.log(this.state.mailValide,this.state.mdpValide)
-                axios.post(window.url + '/user', this.state)
+                axios.post('http://localhost:4000/createClient', this.state)
                 .then(response => {
                     console.log(response)
                     alert("Votre inscription est validée.")
-                    this.props.history.push('/connexion')
+                    //this.props.history.push('/connexion')
                 })
                 .catch(error => {
                     alert("Mail deja existant")
@@ -48,7 +48,7 @@ class Inscription extends React.Component {
 
     validationemail = () => {
         let expressionReguliere = /^(([^<>()[]\.,;:s@]+(.[^<>()[]\.,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/ ;
-        if (expressionReguliere.test(this.state.mail)){	
+        if (expressionReguliere.test(this.state.email)){	
             console.log("Adresse mail valide.");
             this.state.mailValide = true
         }
@@ -59,10 +59,11 @@ class Inscription extends React.Component {
     }
 
     confmdp = () => {
-        if(this.state.mdp == this.state.confmdp){
+        if(this.state.password == this.state.confirmPassword){
             this.state.mdpValide = true
         }
         else{
+            this.state.mdpValide = false
             alert("Mauvaise confirmation de mot de passe.")
         }
     }
@@ -76,32 +77,27 @@ class Inscription extends React.Component {
                     <h2>Veuillez remplir les informations ci-dessous</h2>
                     <div>
                         <label htmlFor="Nom">Nom :</label>
-                        <input type="texte" id="nom" name="nom" value={this.state.nom} onChange={this.handleChange}
+                        <input type="texte" id="nom" name="fullName" value={this.state.fullName} onChange={this.handleChange}
                                required/>
                     </div>
                     <div>
                         <label htmlFor="Prenom">Prenom :</label>
-                        <input type="texte" id="prenom" name="prenom" value={this.state.prenom}
+                        <input type="texte" id="prenom" name="userName" value={this.state.userName}
                                onChange={this.handleChange} required/>
                     </div>
                     <div>
                         <label htmlFor="Mail">Mail :</label>
-                        <input type="texte" id="mail" name="mail" value={this.state.mail} onChange={this.handleChange}
-                               required/>
-                    </div>
-                    <div>
-                        <label htmlFor="Tem">Numéro de téléphone :</label>
-                        <input type="texte" id="tel" name="tel" value={this.state.tel} onChange={this.handleChange}
+                        <input type="texte" id="mail" name="email" value={this.state.email} onChange={this.handleChange}
                                required/>
                     </div>
                     <div>
                         <label htmlFor="Mdp">Mot de passe :</label>
-                        <input type="password" id="mdp" name="mdp" value={this.state.mdp} onChange={this.handleChange}
+                        <input type="password" id="mdp" name="password" value={this.state.password} onChange={this.handleChange}
                                required/>
                     </div>
                     <div>
                         <label htmlFor="ConfMdp">Confirmer mot de passe :</label>
-                        <input type="password" id="confmdp" name="confmdp" value={this.state.confmdp}
+                        <input type="password" id="confmdp" name="confirmPassword" value={this.state.confirmPassword}
                                onChange={this.handleChange} required/>
                     </div>
                     <div className="confirmer">

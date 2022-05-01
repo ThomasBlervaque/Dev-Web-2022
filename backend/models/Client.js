@@ -17,7 +17,7 @@ const templateClient= new mongoose.Schema({
     },
     birthDay:{
         type: Date,
-        required: true
+        required: false
     },
     password:{
         type: String,
