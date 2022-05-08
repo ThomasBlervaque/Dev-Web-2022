@@ -3,7 +3,8 @@ const routerClient = express.Router()
 const Client = require("../models/Client")
 const bcrypt = require("bcrypt");
 const {error} = require("rest-client");
-const {json} = require("express");
+const {json, request, response} = require("express");
+const {router} = require("express/lib/application");
 
 routerClient.post('/createClient',async(request,
                                         response, next)=>{
@@ -44,6 +45,16 @@ routerClient.get ('/showOneClient/:id',(request, response, next)=>{
     }
 )
 
+routerClient.get ('/searchEmail/:email',(request, response, next)=>{
+    Client.findOne({ email: request.body.email })
+        .then((person)=>{
+            response.status(200).json(person)})
+        .catch((error)=>{
+            response.status(404).json({error:error})})
+    }
+)
+
+
 routerClient.put('/modify/:id',(request,response, next)=>{
     const client = new Client({
         _id: request.params.id,
@@ -75,10 +86,39 @@ routerClient.delete('/delete/:id',(request, response, next)=>{
 routerClient.get('/showAllClient', (request,response,next)=>{
     Client.find()
         .then((client)=>{
-            response.status(200).json(client)})
+            response.status(200).json(client)}
+        )
         .catch((error)=>{
             response.status(400).json({error:error})
         })
 })
+
+// Connexion d'un utilisateur
+
+routerClient.post ('/login/:email',(request, response, next)=>{
+    Client.findOne({ email: request.body.email })
+        .then(client => {
+          if (!client) {
+            return response.status(401).json({ error: 'Utilisateur non trouvé !' });
+          }
+          bcrypt.compare(request.body.password, client.password)
+            .then(valid => {
+              if (!valid) {
+                return response.status(401).json({ error: 'Mot de passe incorrect !' });
+              }
+              response.status(200).json({
+                userId: client._id,
+                token: jwt.sign(
+                  { userId: client._id },
+                  'RANDOM_TOKEN_SECRET',
+                  { expiresIn: '24h' }
+                )
+              });
+            })
+            .catch(error => response.status(500).json({ error }));
+        })
+        .catch(error => response.status(500).json({ error }));
+})
+
 
 module.exports = routerClient

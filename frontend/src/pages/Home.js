@@ -1,5 +1,4 @@
 import main from '../assets/main.png'
-
 import '../styles/Home.css'
 
 function Home(){

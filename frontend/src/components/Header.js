@@ -8,9 +8,8 @@ function Header(){
                 <li><Link to='/'> Accueil</Link></li>
                 <li><Link to='/lineUp'> Line-up </Link></li>
                 <li><Link to='/achat-ticket'> Achat Ticket </Link></li>
-                <li><Link to='/user'> Utilisateur </Link></li>
-                <li><Link to='/admin'> Admin </Link> </li>
                 <li><Link to='/inscription'> Inscription </Link> </li>
+                <li><Link to='/connexion'> Connexion </Link> </li>
 
 
             </ul>

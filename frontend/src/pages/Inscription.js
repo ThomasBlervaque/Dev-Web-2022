@@ -30,13 +30,22 @@ class Inscription extends React.Component {
         this.validationemail();
         this.confmdp();
         console.log(this.state)
-        if(this.state.mailValide == true && this.state.mdpValide == true){
+        if(this.state.mailValide === true && this.state.mdpValide === true){
                 console.log(this.state.mailValide,this.state.mdpValide)
                 axios.post('http://localhost:4000/createClient', this.state)
                 .then(response => {
                     console.log(response)
                     alert("Votre inscription est validée.")
                     //this.props.history.push('/connexion')
+                    this.setState({
+                        fullName : '',
+                        userName : '',
+                        email : '',
+                        password : '',
+                        confirmPassword : '',
+                        mailValide : false,
+                        mdpValide : false,
+                    })
                 })
                 .catch(error => {
                     alert("Mail deja existant")
@@ -59,16 +68,15 @@ class Inscription extends React.Component {
     }
 
     confmdp = () => {
-        if(this.state.password == this.state.confirmPassword){
+        if(this.state.password === this.state.confirmPassword){
             this.state.mdpValide = true
         }
         else{
             this.state.mdpValide = false
-            alert("Mauvaise confirmation de mot de passe.")
+            alert("Les mots de passe ne sont pas identiques.")
         }
     }
 
-    
     render () {
         return <form onSubmit={this.submitHandler}>
             <div className={'row-wrapper'}>

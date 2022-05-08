@@ -1,3 +1,7 @@
 
-GET http://localhost:4000/showAllFestivalDays+
+//GET http://localhost:4000/showAllClient
+//GET http://localhost:4000/showOneClient/62707b54c4c41c9166722104
+//GET http://localhost:4000/searchEmail/:ronaldo@//yahoo.fr
+DELETE http://localhost:4000/delete/626a7ec81ca0610b36ebab98
 content-Type: application/json
+

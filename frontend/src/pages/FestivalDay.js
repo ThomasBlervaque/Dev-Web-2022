@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-class FestvalDay extends React.Component{
+class FestivalDay extends React.Component{
 
     constructor(props) {
         super(props);
@@ -13,4 +13,4 @@ class FestvalDay extends React.Component{
 
 }
 
-export default FestvalDay
+export default FestivalDay

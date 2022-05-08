@@ -3,13 +3,13 @@ const express = require('express')
 const  app = express() // Création de l'application
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const routeConnexion = require('./routes/connexionRoute') // lien vers la route de l'url
 const routeClient = require('./routes/clientRoute')
 const routeReservation = require('./routes/Reservation')
 const routeFestivalDay = require('./routes/festivalDayRoute')
 const routeBand = require('./routes/bandRoute')
 const cors = require('cors')
 const bodyParser = require("express");
+
 
 
 dotenv.config()
@@ -19,7 +19,7 @@ app.use(express.json()) // Convertir les données au formats JSON
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-app.use('/',routeConnexion) //Middelware Function permettant d'avoir acces à la requête et sa réponse
+//app.use('/',routeConnexion) //Middelware Function permettant d'avoir acces à la requête et sa réponse
 app.use('/',routeClient)
 app.use('/',routeFestivalDay)
 app.use('/',routeReservation)
