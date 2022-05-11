@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import GroupeSamedi from './ShowGroupesSamedi'
+import GroupesVendredi from './ShowGroupesVendredi';
 
 function LineUp(){
     
@@ -9,6 +11,7 @@ function LineUp(){
             <div>
                 <button onClick={()=>{setDay(true)}}>Vendredi</button>
                 <button onClick={()=>{setDay(false)}}>Samedi</button>
+                <GroupesVendredi/>
             </div>
         )
     }
@@ -17,6 +20,7 @@ function LineUp(){
             <div>
                 <button onClick={()=>{setDay(true)}}>Vendredi</button>
                 <button onClick={()=>{setDay(false)}}>Samedi</button>
+                <GroupeSamedi />
             </div>
         )
     }
