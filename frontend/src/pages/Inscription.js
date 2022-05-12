@@ -94,7 +94,7 @@ class Inscription extends React.Component {
                     </div>
                     <div>
                         <label htmlFor="Mail">Mail :</label>
-                        <input type="texte" id="mail" name="email" value={this.state.email} onChange={this.handleChange}
+                        <input type="texte" id="mail" name="email" data-testid="mail" value={this.state.email} onChange={this.handleChange}
                                required/>
                     </div>
                     <div>
