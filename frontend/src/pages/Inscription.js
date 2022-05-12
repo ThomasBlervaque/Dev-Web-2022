@@ -26,10 +26,9 @@ class Inscription extends React.Component {
 
     submitHandler = e => {
         e.preventDefault()
-        console.log(this.state)
+        //console.log(this.state)
         this.validationemail();
         this.confmdp();
-        console.log(this.state)
         if(this.state.mailValide === true && this.state.mdpValide === true){
                 console.log(this.state.mailValide,this.state.mdpValide)
                 axios.post('http://localhost:4000/createClient', this.state)
@@ -48,10 +47,10 @@ class Inscription extends React.Component {
                     })
                 })
                 .catch(error => {
-                    alert("Mail deja existant")
+                    alert("Les mots de passe ne sont pas identiques")
                 })
         }
-        console.log(this.state.mailValide,this.state.mdpValide)
+        //console.log(this.state.mailValide,this.state.mdpValide)
         
     }
 

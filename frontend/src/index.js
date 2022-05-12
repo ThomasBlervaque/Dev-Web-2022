@@ -7,6 +7,7 @@ import LineUp from "./pages/LineUp";
 import Home from "./pages/Home"
 import Inscription from "./pages/Inscription"
 import Connexion from "./pages/Connexion";
+import CreateBand from "./pages/CreateBand";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ ReactDOM.render(
         <Route path='/lineUp' element={<LineUp/>}/>
         <Route path='/inscription' element={<Inscription/>}/>
         <Route path='/connexion' element={<Connexion/>}/>
+        <Route path='/creationBand' element ={<CreateBand/>}/>
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

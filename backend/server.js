@@ -24,5 +24,5 @@ app.use('/',routeClient)
 app.use('/',routeFestivalDay)
 app.use('/',routeReservation)
 app.use('/',routeBand)
-//app.set('view engine, 'ejs)
+app.set("view engine", "ejs");
 app.listen(4000, ()=>console.log("Server is up and running")) // Indique le port sur lequel on a la réponse

@@ -10,8 +10,6 @@ function Header(){
                 <li><Link to='/achat-ticket'> Achat Ticket </Link></li>
                 <li><Link to='/inscription'> Inscription </Link> </li>
                 <li><Link to='/connexion'> Connexion </Link> </li>
-
-
             </ul>
         </nav>
     )

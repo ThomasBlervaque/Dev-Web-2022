@@ -1,54 +1,65 @@
 const  express = require("express")
 const routerBand = express.Router()
-let Band = require("../models/Band")
+const Band = require("../models/Band")
+const multer = require('multer')
+//const fs = require('fs');
+//const path = require('path');
+const {request} = require("express");
 
-let multer = require('multer')
-const path = require("express");
-
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
     destination : (request, file, cb) =>{
-        cb(null, 'uploads')
+        cb(null, './uploads/')
     },
     filename: (request, file, cb) =>
-        cb(null, file.filename + '-'+ Date.now())
+        cb(null, new Date().toISOString() + file.originalname )
 })
-let upload = multer({storage:storage})
 
-/*routerBand.post('/createBand', Band.single('image'), async(request,
-                                        response, next)=>{
-    const band = new Band({
-        nameBand: request.body.nameBand,
-        numberMember: request.body.numberMember,
-        creationYear: request.body.creationYear,
-        history: request.body.history,
-        img:{
-            data : fs.readFileSync(path.join(__dirname + 'uploads' + request.file.filename)),
-            contentType: 'image/png'
-        }
-    })
-    Band.create(obj,(err, item) =>{
-      if (err){
-          console.log(err)
-      }
-      else {
-         band.save()
+const fileFilter = (request,file,cb)=>{
+    //reject a file
+    if (file.mimetype === 'image/jpg'|| file.mimetype === 'image.png'){
+        cb(null,true)
+    }else {
+        cb(null,false)
+    }
+}
+
+const upload = multer({
+    storage:storage,
+    limits:{
+        fileSize: 1024 * 1024 *5},
+    fileFilter : fileFilter
+})
+
+
+routerBand.post('/createBand', upload.single('bandImage'), async(request,
+                                        response, next)=> {
+        const band = new Band({
+            nameBand: request.body.nameBand,
+            numberMember: request.body.numberMember,
+            creationYear: request.body.creationYear,
+            history: request.body.history,
+            bandImage:request.body.bandImage
+            //: request.file.path
+
+        })
+    console.log("Données chargées")
+    band.save()
                  .then(()=>{
                         response.status(201).json({message: "Post saved succefully !"})
                     })
                     .catch((error)=>{
                         response.status(400).json({error:error})
                     })
-      }
+/*
+        if (Band.find({"nameBand":this.state.nameBand }).count() < 0) {
+            Console.log("Créer car n'existe pas")
+
+        } else {
+            json({message: "Le groupe existe déjà"})
+
+
+        }*/
     })
-       ** (Band.find({ "email": clientMail }).count()<0) {**
-
-
-       **}
-       else {
-             json({message: "L'utilisateur existe déjà"})
-       }**
-   }
-)*/
 
 routerBand.put('/modify/:id',(request,response, next)=>{
     const band = new Band({
@@ -78,12 +89,15 @@ routerBand.delete('/delete/:id',(request, response, next)=>{
 )
 
 routerBand.get('/showAllBand', (request,response,next)=>{
-    Band.find()
-        .then((client)=>{
-            response.status(200).json(client)})
-        .catch((error)=>{
-            response.status(400).json({error:error})
-        })
+    Band.find({}, (err, items)=>{
+        if(err){
+            console.log(err)
+            response.status(500).send("Une erreur s'est produite", err)
+        }
+        else{
+            response.render('imagesPage',{items:items})
+        }
+    })
 })
 
 module.exports = routerBand

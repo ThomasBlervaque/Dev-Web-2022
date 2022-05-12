@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import {Form, FormGroup, Button, Input, Label} from "reactstrap";
 import '../styles/Inscription.css'
+import error from "../components/Error";
 
 
 
@@ -37,7 +38,19 @@ class ConnexionUser extends  Component{
           email: this.state.email,
           password: this.state.password,
       }
-      axios.post(  'http://localhost:4000/login/'+this.state.email)
+      axios.post(  'http://localhost:4000/login',registered)
+          .then(response =>{
+              if (response.status === 200){
+                  alert('Connexion réussie' )}
+          })
+      .catch((error)=>{
+            alert('Echec de la connexion' +
+                'veuillez verifier votre email ou mot de passe')
+        })
+
+
+
+      //console.log('reponse '+ rep)
       this.setState({
                         email : '',
                         password : ''
@@ -56,14 +69,14 @@ class ConnexionUser extends  Component{
                        value={this.state.email}
                        required
                   />
-                <Label> Mot de passe</Label>
-                <Input type='password'
+                    <Label> Mot de passe</Label>
+                    <Input type='password'
                        placeholder='password'
                        onChange={this.changePassword}
                        value={this.state.password}
                        className='form-control from-group'
                 />
-                <div className="confirmer">
+                    <div className="confirmer">
                         <button className='btn btn-primary' type="submit" id='sub' name='sub'>Connexion </button>
                     </div>
               </Form>
