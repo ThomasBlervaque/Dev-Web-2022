@@ -3,10 +3,10 @@ const express = require('express')
 const  app = express() // Création de l'application
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
-const routeClient = require('./routes/clientRoute')
+const routeClient = require('./routes/Client')
 const routeReservation = require('./routes/Reservation')
-const routeFestivalDay = require('./routes/festivalDayRoute')
-const routeBand = require('./routes/bandRoute')
+const routeFestivalDay = require('./routes/FestivalDay')
+const routeBand = require('./routes/Band')
 const cors = require('cors')
 const bodyParser = require("express");
 

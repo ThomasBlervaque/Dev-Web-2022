@@ -6,8 +6,9 @@ import Header from "./components/Header";
 import LineUp from "./pages/LineUp";
 import Home from "./pages/Home"
 import Inscription from "./pages/Inscription"
-import Connexion from "./pages/Connexion";
-import CreateBand from "./pages/CreateBand";
+import Connexion from "./pages/Connexion"
+import CreateBand from "./pages/CreateBand"
+
 
 ReactDOM.render(
   <BrowserRouter>

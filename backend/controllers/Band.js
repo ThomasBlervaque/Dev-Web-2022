@@ -1,10 +1,11 @@
 const  express = require("express")
-const routerBand = express.Router()
 const Band = require("../models/Band")
 const multer = require('multer')
 //const fs = require('fs');
 //const path = require('path');
 const {request} = require("express");
+
+
 
 const storage = multer.diskStorage({
     destination : (request, file, cb) =>{
@@ -31,8 +32,7 @@ const upload = multer({
 })
 
 
-routerBand.post('/createBand', upload.single('bandImage'), async(request,
-                                        response, next)=> {
+exports.createBand =  upload.single('bandImage'), async(request, response)=> {
         const band = new Band({
             nameBand: request.body.nameBand,
             numberMember: request.body.numberMember,
@@ -44,24 +44,15 @@ routerBand.post('/createBand', upload.single('bandImage'), async(request,
         })
     console.log("Données chargées")
     band.save()
-                 .then(()=>{
-                        response.status(201).json({message: "Post saved succefully !"})
-                    })
-                    .catch((error)=>{
-                        response.status(400).json({error:error})
-                    })
-/*
-        if (Band.find({"nameBand":this.state.nameBand }).count() < 0) {
-            Console.log("Créer car n'existe pas")
+        .then(()=>{
+            response.status(201).json({message: "Post saved succefully !"})
+        })
+        .catch((error)=>{
+            response.status(400).json({error:error})
+            })
+    }
 
-        } else {
-            json({message: "Le groupe existe déjà"})
-
-
-        }*/
-    })
-
-routerBand.put('/modify/:id',(request,response, next)=>{
+exports.modifyBand = (request,response)=>{
     const band = new Band({
         _id: request.params.id,
         nameBand: request.body.nameBand,
@@ -76,9 +67,8 @@ routerBand.put('/modify/:id',(request,response, next)=>{
     .catch((error)=>{
         response.status(400).json({error:error})})
     }
-)
 
-routerBand.delete('/delete/:id',(request, response, next)=>{
+exports.deleteBand = (request, response)=>{
     Band.deleteOne({_id:request.params.id})
         .then(()=>{
             response.status(200).json({message:"Deleted !"})
@@ -86,9 +76,9 @@ routerBand.delete('/delete/:id',(request, response, next)=>{
     .catch((error)=>{
         response.status(400).json({error:error})})
     }
-)
 
-routerBand.get('/showAllBand', (request,response,next)=>{
+
+exports.getBand = (request,response)=>{
     Band.find({}, (err, items)=>{
         if(err){
             console.log(err)
@@ -98,6 +88,4 @@ routerBand.get('/showAllBand', (request,response,next)=>{
             response.render('imagesPage',{items:items})
         }
     })
-})
-
-module.exports = routerBand
+}

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import {Form, FormGroup, Button, Input, Label} from "reactstrap";
 import '../styles/Inscription.css'
+
 import error from "../components/Error";
 
 

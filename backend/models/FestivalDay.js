@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 const templateFestivalDay = new mongoose.Schema({
     dateFestival:{
         type: Date,

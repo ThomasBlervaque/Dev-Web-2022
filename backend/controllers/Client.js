@@ -1,10 +1,9 @@
-const  express = require("express")
-const routerClient = express.Router()
 const Client = require("../models/Client")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-routerClient.post('/createClient', (request,
-                                        response)=>{
+
+
+exports.createClient = (request, response)=>{
     bcrypt.hash(request.body.password,10)
         .then(hash=>{
             const client = new Client({
@@ -15,9 +14,7 @@ routerClient.post('/createClient', (request,
         confirmPassword: hash,
         password: hash
     })
-            console.log('MP '+ hash)
-            console.log('C P'+ hash)
-           client.save()
+            client.save()
                  .then(()=>{
                         response.status(201).json({message: "Post saved succefully !"})
                         console.log('Super')
@@ -28,18 +25,18 @@ routerClient.post('/createClient', (request,
                     })
 
     })
+}
 
-})
-routerClient.get ('/showOneClient/:id',(request, response)=>{
+
+exports.showOneClient=(request, response)=>{
     Client.findOne({_id:request.params.id})
         .then((person)=>{
             response.status(200).json(person)})
         .catch((error)=>{
             response.status(404).json({error:error})})
     }
-)
 
-routerClient.get ('/searchEmail/:email',(request, response)=>{
+exports.searchEmail =(request, response)=>{
     console.log(request.params.email)
     Client.findOne({ email: request.params.email })
         .then((person)=>{
@@ -47,10 +44,9 @@ routerClient.get ('/searchEmail/:email',(request, response)=>{
         .catch((error)=>{
             response.status(404).json({error:error})})
     }
-)
 
 
-routerClient.put('/modify/:id',(request,response)=>{
+exports.modify=(request,response)=>{
     const client = new Client({
         _id: request.params.id,
         fullName: request.body.fullName,
@@ -66,9 +62,8 @@ routerClient.put('/modify/:id',(request,response)=>{
     .catch((error)=>{
         response.status(400).json({error:error})})
     }
-)
 
-routerClient.delete('/delete/:id',(request, response)=>{
+exports.delete =(request, response)=>{
     Client.deleteOne({_id:request.params.id})
         .then(()=>{
             response.status(200).json({message:"Deleted !"})
@@ -76,9 +71,8 @@ routerClient.delete('/delete/:id',(request, response)=>{
     .catch((error)=>{
         response.status(400).json({error:error})})
     }
-)
 
-routerClient.get('/showAllClient', (request,response)=>{
+exports.showAllClient = (request,response)=>{
     Client.find()
         .then((client)=>{
             response.status(200).json(client)}
@@ -86,11 +80,10 @@ routerClient.get('/showAllClient', (request,response)=>{
         .catch((error)=>{
             response.status(400).json({error:error})
         })
-})
+}
 
-// Connexion d'un utilisateur
 
-routerClient.post ('/login', (request, response)=> {
+exports.login = (request, response)=> {
     Client.findOne({email: request.body.email})
         .then(client => {
             console.log(client)
@@ -117,8 +110,6 @@ routerClient.post ('/login', (request, response)=> {
     })
     .catch(error => response.status(500).json({ error }));
 
-})
+}
 
 
-
-module.exports = routerClient
