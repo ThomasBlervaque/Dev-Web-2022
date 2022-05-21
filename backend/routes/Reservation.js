@@ -1,8 +1,9 @@
 const  express = require("express")
 const router = express.Router()
 const reservationCtrl = require("../controllers/Reservation")
+const authentification = require('../middleware/authentification')
 
-router.post('/createFestivalDay', reservationCtrl.createReservation)
+router.post('/createFestivalDay', authentification,  reservationCtrl.createReservation)
 
 router.get ('/showReservation/:id',reservationCtrl.deleteReservation)
 

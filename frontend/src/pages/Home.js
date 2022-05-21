@@ -3,9 +3,9 @@ import '../styles/Home.css'
 
 function Home(){
     return(<div className='home-div'>
-        <banner class = "background-image">
+        <div class = "background-image">
            <img className='main-page-image' alt="photo page d\'accueil" src={main}/>
-        </banner>
+        </div>
         <div id="WelcomeTextspace">
             <span>
             Nous sommes heureux de vous annoncer que le festival "Rock and Troll" aura lieux cette année 2022 !

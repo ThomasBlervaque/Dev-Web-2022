@@ -1,133 +1,95 @@
-import React, {Component} from "react";
-import "bootstrap/dist/css/bootstrap.min.css"
-import axios from 'axios'
-import {Form, FormGroup, Button, Input, Label} from "reactstrap";
-import '../styles/Inscription.css'
+import React from "react";
+import axios from "axios";
 
 
-// Page de création d'un utilisateur
 
-class CreateBand extends  Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-            nameBand: '',
-            numberMember: '',
+class CreateBand extends React.Component {
+    constructor (props){
+        super(props)
+        this.state = {
+            nameBand : '',
+            numberMember : '',
             creationYear: '',
             history: '',
-            img: ''
+            bandImage: ''
+        }
+        this.handleChange = this.handleChange.bind(this)
     }
-    this.changeNameBand = this.changeNameBand.bind(this)
-    this.changeNumberMember = this.changeNumberMember.bind(this)
-    this.changeCreationYear = this.changeCreationYear.bind(this)
-    this.changeHistory = this.changeHistory.bind(this)
-    this.changeImage = this.changeImage.bind(this)
-    this.onSubmit= this.onSubmit.bind(this)
-  }
-
-  changeNameBand(event){
-    this.setState({
-      nameBand:event.target.value
-    })
-  }
-
-  changeNumberMember(event){
-    this.setState({
-      numberMember:event.target.value
-    })
-  }
-
-  changeCreationYear(event){
-    this.setState({
-      creationYear:event.target.value
-    })
-  }
-
-  changeHistory(event){
-    this.setState({
-      history:event.target.value
-    })
-  }
-
-  changeImage(event) {
+    handleChange(e){
+      const name = e.target.name
       this.setState({
-          bandImage: event.target.value
+          [name]: e.target.value
       })
-  }
-
-  onSubmit(event) {
-      event.preventDefault()
-      const registered = {
-          nameBand: this.state.nameBand,
-          numberMember: this.state.numberMember,
-          creationYear: this.state.creationYear,
-          history: this.state.history,
-          bandImage: this.state.img
-      }
-      //console.log(registered)
-      const rep = axios.post(  'http://localhost:4000/createBand',registered)
-
-      //console.log('reponse après')
-      this.setState({
-                        nameBand : '',
-                        numberMember : '',
-                        creationYear: '',
-                        history: '',
-                        bandImage: ''
+    }
+    submitHandler = e => {
+        e.preventDefault()
+        axios.post(  'http://localhost:4000/createBand',this.state)
+            .then(response => {
+                    alert("Votre groupe a été crée.")
+                    this.setState({
+                       nameBand : '',
+                       numberMember : '',
+                       creationYear: '',
+                       history: '',
+                       bandImage: ''
                     })
-  }
-  render() {
-    return(
-        <div className="form-connexion">
-          <div className='container'>
-            <div className='form-div'>
-              <Form onSubmit={this.onSubmit}>
-                  <Label>Nom du groupe </Label>
-                  <Input type='text'
-                       placeholder=''
-                       onChange={this.changeNameBand}
-                       value={this.state.nameBand}
-                       required
-                  />
-                    <Label> Nombre de membres </Label>
-                    <Input type='number'
-                       placeholder=''
-                       onChange={this.changeNumberMember}
-                       value={this.state.numberMember}
-                       className='form-control from-group'
-                    />
-
-                    <Label> Année de création </Label>
-                    <Input type='date'
-                       placeholder=''
-                       onChange={this.changeCreationYear}
-                       value={this.state.creationYear}
-                       className='form-control from-group'
-                    />
-
-                    <Label> Histoire </Label>
-                    <Input type='textarea'
-                       placeholder=''
-                       onChange={this.changeHistory}
-                       value={this.state.history}
-                       className='form-control from-group'
-                    />
-                    <Label htmlFor="image"> Upload Image  </Label>
-                    <Input type='file' id='image' name='image'
-                       onChange={this.changeImage}
-                       value={this.state.bandImage}
-                       className='form-control from-group'
-                    />
-
-                    <div className="confirmer">
-                        <button className='btn btn-primary' type="submit" id='sub' name='sub'>Enregistrer  </button>
+                })
+                .catch(error => {
+                    console.log(this.state)
+                    alert("Groupe non crée")
+                })
+        }
+    render () {
+        return <form onSubmit={this.submitHandler}>
+            <div className={'row-wrapper'}>
+                <div className="column-wrapper contact">
+                    <div>
+                        <label htmlFor="Nom"> Nom du groupe :</label>
+                        <input type="text" id="nameBand" name="nameBand"
+                               value={this.state.nameBand}
+                               onChange={this.handleChange}
+                               required
+                        />
                     </div>
-              </Form>
+                    <div>
+                        <label htmlFor="numberMember"> Nombre de membres  :</label>
+                        <input type="number" id="numberMember" name="numberMember"
+                               value={this.state.numberMember}
+                               onChange={this.handleChange}
+                               required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="Année de création"> Année de création  :</label>
+                        <input type="date" id="creationYear" name="creationYear"
+                               value={this.state.creationYear}
+                               onChange={this.handleChange}
+                               required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="Histoire"> Histoire :</label>
+                        <input type="textarea" id="history" name="history"
+                               value={this.state.history}
+                               onChange={this.handleChange}
+                               required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="image"> Upload Image  </label>
+                        <input type='file' id='image' name='image'
+                           onChange={this.handleChange}
+                           value={this.state.bandImage}
+                           className='form-control from-group'
+                        />
+                    </div>
+                    <div className="confirmer">
+                        <button className='btn btn-primary' type="submit" id='sub' name='sub'> Valider </button>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-    )
-  }
+        </form>
+    }
 }
 
-export  default  CreateBand
+export default CreateBand

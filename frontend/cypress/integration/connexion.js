@@ -1,5 +1,5 @@
 describe('Connexion test',()=>{
-    it('Pour se loger ',()=>{
+    it('Pour se loger',()=> {
         expect(true).to.equal(true)
         cy.visit('http://localhost:3000/');
         cy.visit('http://localhost:3000/connexion');

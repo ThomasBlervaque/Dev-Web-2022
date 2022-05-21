@@ -1,50 +1,45 @@
 const  express = require("express")
+const  router = express.Router()
 const Band = require("../models/Band")
-const multer = require('multer')
-//const fs = require('fs');
-//const path = require('path');
-const {request} = require("express");
+const multer = require('multer');
 
-
+//define storage for the images
 
 const storage = multer.diskStorage({
-    destination : (request, file, cb) =>{
-        cb(null, './uploads/')
-    },
-    filename: (request, file, cb) =>
-        cb(null, new Date().toISOString() + file.originalname )
-})
+  //destination for files
+  destination: function (request, file, callback) {
+    callback(null, './public/uploads/images');
+  },
 
-const fileFilter = (request,file,cb)=>{
-    //reject a file
-    if (file.mimetype === 'image/jpg'|| file.mimetype === 'image.png'){
-        cb(null,true)
-    }else {
-        cb(null,false)
-    }
-}
+  //add back the extension
+  filename: function (request, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  },
+});
 
+//upload parameters for multer
 const upload = multer({
-    storage:storage,
-    limits:{
-        fileSize: 1024 * 1024 *5},
-    fileFilter : fileFilter
+  storage: storage,
+  limits: {
+    fieldSize: 1024 * 1024 * 3,
+  },
 })
 
 
-exports.createBand =  upload.single('bandImage'), async(request, response)=> {
-        const band = new Band({
-            nameBand: request.body.nameBand,
-            numberMember: request.body.numberMember,
-            creationYear: request.body.creationYear,
-            history: request.body.history,
-            bandImage:request.body.bandImage
-            //: request.file.path
-
-        })
-    console.log("Données chargées")
+exports.createBand =  upload.single('image'), (request, response)=> {
+    const bandObject = JSON.parse(request.body.band)
+    let band = new Band({
+        nameBand: request.body.nameBand,
+        numberMember: request.body.numberMember,
+        creationYear: request.body.creationYear,
+        history: request.body.history,
+        bandImage:request.body.bandImage
+        //imageUrl: `${request.protocol}://${request.get('host')}/images/${request.files.filename}`
+    })
+    console.log("Données chargées"+ band)
     band.save()
         .then(()=>{
+            console.log('la réponse est '+response)
             response.status(201).json({message: "Post saved succefully !"})
         })
         .catch((error)=>{

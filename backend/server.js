@@ -8,7 +8,8 @@ const routeReservation = require('./routes/Reservation')
 const routeFestivalDay = require('./routes/FestivalDay')
 const routeBand = require('./routes/Band')
 const cors = require('cors')
-const bodyParser = require("express");
+const bodyParser = require("express")
+const path = require('path')
 
 
 
@@ -25,4 +26,5 @@ app.use('/',routeFestivalDay)
 app.use('/',routeReservation)
 app.use('/',routeBand)
 app.set("view engine", "ejs");
+app.use('/images', express.static(path.join(__dirname, 'images')))
 app.listen(4000, ()=>console.log("Server is up and running")) // Indique le port sur lequel on a la réponse

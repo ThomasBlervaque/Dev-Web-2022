@@ -66,6 +66,7 @@ class ConnexionUser extends  Component{
                   <Label>e-mail</Label>
                   <Input type='text'
                        placeholder='E-mail'
+                         id='email'
                        onChange={this.changeEmail}
                        value={this.state.email}
                        required
@@ -73,6 +74,7 @@ class ConnexionUser extends  Component{
                     <Label> Mot de passe</Label>
                     <Input type='password'
                        placeholder='password'
+                           id='password'
                        onChange={this.changePassword}
                        value={this.state.password}
                        className='form-control from-group'
