@@ -10,21 +10,26 @@ const routeBand = require('./routes/Band')
 const cors = require('cors')
 const bodyParser = require("express")
 const path = require('path')
-
-
+const PORT = process.env.PORT || 4000
 
 dotenv.config()
 // AddUser de la base de donnée via le fichier .env
-mongoose.connect(process.env.DATABASE_ACCESS, () =>console.log("Database connected"))
+mongoose.connect(process.env. DATABASE_ACCESS, () =>console.log("Database connected"))
 app.use(express.json()) // Convertir les données au formats JSON
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(cors())
-//app.use('/',routeConnexion) //Middelware Function permettant d'avoir acces à la requête et sa réponse
+
+//Middelware Fonction permettant d'avoir acces à la requête et sa réponse
 app.use('/',routeClient)
 app.use('/',routeFestivalDay)
 app.use('/',routeReservation)
 app.use('/',routeBand)
 app.set("view engine", "ejs");
 app.use('/images', express.static(path.join(__dirname, 'images')))
-app.listen(4000, ()=>console.log("Server is up and running")) // Indique le port sur lequel on a la réponse
+
+if (process.env.NODE_ENV == 'production'){
+    app.use(express.static('client/build'))
+}
+
+app.listen(PORT, ()=>console.log("Server is up and running")) // Indique le port sur lequel on a la réponse

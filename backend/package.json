@@ -4,22 +4,31 @@
   "description": "Gestion vente ticket ",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "cd client && npm run build",
+    "install-client" : "cd client && npm run build",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node server.js",
+    "client": "cd client && npm start",
+    "dev": "concurrently -n 'server,client' -c 'red,green' \"nodemon server.js\" \"npm run client"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ThomasBlervaque/Dev-Web-2022"
   },
-  "author": "Serge KOUVAHE",
+  "author": "Serge KOUVAHE, Thomas Blervaque",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "html-webpack-plugin": "^5.5.0",
     "mongoose": "^6.2.7",
     "multer": "^1.4.4",
     "nodemon": "^2.0.15",
-    "rest-client": "^0.1.5"
+    "rest-client": "^0.1.5",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
   }
 }
