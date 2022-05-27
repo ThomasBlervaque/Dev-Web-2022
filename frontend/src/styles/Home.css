@@ -1,5 +1,5 @@
 .main-page-image{
-    height: 600px;
+    height: 1400px;
     width: 1500px;
 }
 .home-div{
@@ -8,11 +8,12 @@
     align-items: center;
 }
 #WelcomeTextspace {
-    background-color: White;
+    font-family: sans-serif;
+    font-size: large;
+    background-color: white;
     padding: 0% 10% 0% 10% ;
-    margin-top: -850px;
+    margin-top: -1050px;
     margin-left: -80px;
-    height-min: 55%;
     width: 90%;
     position: absolute;
     top:160%;

@@ -42,9 +42,6 @@ class Inscription extends React.Component {
 
     submitHandler = e => {
         e.preventDefault()
-        console.log('1 '+this.state.checkMail)
-        this.checkEmail()
-        console.log('2 '+this.state.checkMail)
         this.validationEmail()
         this.confirmPassword()
 

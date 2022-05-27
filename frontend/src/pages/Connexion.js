@@ -1,11 +1,12 @@
-import React, {Component} from "react";
+import React, {useState, Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import axios from 'axios'
 import {Form, FormGroup, Button, Input, Label} from "reactstrap";
 import '../styles/Inscription.css'
 
 import error from "../components/Error";
-
+import { useNavigate } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 
 // Page de création d'un utilisateur
@@ -15,11 +16,10 @@ class ConnexionUser extends  Component{
     super(props)
     this.state ={
       email: '',
-      password:''
+      password:'',
     }
     this.changeEmail = this.changeEmail.bind(this)
     this.changePassword = this.changePassword.bind(this)
-
     this.onSubmit= this.onSubmit.bind(this)
   }
   changeEmail(event){
@@ -33,20 +33,31 @@ class ConnexionUser extends  Component{
       password:event.target.value
     })
   }
-  onSubmit(event) {
+
+  async onSubmit(event) {
       event.preventDefault()
       const registered = {
           email: this.state.email,
           password: this.state.password,
       }
-      axios.post(  'http://localhost:4000/login',registered)
+      axios.post('http://localhost:4000/login',registered)
           .then(response =>{
+              console.log(response)
+              const  jwt_token  = response.data['token']
+              const id_user = response.data['userId']
+              console.log(sessionStorage.getItem('JWT'))
+              sessionStorage.setItem('JWT', jwt_token)
+              sessionStorage.setItem('userId', id_user)
+
+              console.log(jwt_token)
               if (response.status === 200){
-                  alert('Connexion réussie' )}
+                  alert('Connexion réussie')
+                  window.location.assign("http://localhost:3000")
+                }
           })
       .catch((error)=>{
             alert('Echec de la connexion' +
-                'veuillez verifier votre email ou mot de passe')
+                ' veuillez verifier votre email ou mot de passe')
         })
 
 
@@ -66,7 +77,7 @@ class ConnexionUser extends  Component{
                   <Label>e-mail</Label>
                   <Input type='text'
                        placeholder='E-mail'
-                         id='email'
+                       id='email'
                        onChange={this.changeEmail}
                        value={this.state.email}
                        required
@@ -74,14 +85,16 @@ class ConnexionUser extends  Component{
                     <Label> Mot de passe</Label>
                     <Input type='password'
                        placeholder='password'
-                           id='password'
+                       id='password'
                        onChange={this.changePassword}
                        value={this.state.password}
                        className='form-control from-group'
+
                 />
                     <div className="confirmer">
-                        <button className='btn btn-primary' type="submit" id='sub' name='sub'>Connexion </button>
+                        <button id='sub' className='btn btn-primary' type="submit"  name='sub'>Connexion </button>
                     </div>
+                    
               </Form>
             </div>
           </div>

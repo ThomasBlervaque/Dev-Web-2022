@@ -24,14 +24,6 @@ function ShowGroupesSamedi(){
                 <li> <img className='image-group' src={copaindj} alt='image copain band'/><p>Heures :<b>01h30 à 2h30</b></p> </li>
 
             </ul>
-            <ul>
-                <p><h1>SCENE TROLLS</h1></p>
-
-            </ul>
-            <ul>
-                <p><h1>SCENE RASTA SQUARE</h1></p>
-
-            </ul>
         </div>
     ) 
 }

@@ -1,11 +1,11 @@
-const  express = require("express")
+const express = require("express")
 const router = express.Router()
 const reservationCtrl = require("../controllers/Reservation")
 const authentification = require('../middleware/authentification')
 
-router.post('/createFestivalDay', authentification,  reservationCtrl.createReservation)
+router.post('/createReservation',authentification,reservationCtrl.createReservation)
 
-router.get ('/showReservation/:id',reservationCtrl.deleteReservation)
+router.get('/showReservation/:client',reservationCtrl.showReservation)
 
 router.put('/modify/:id',reservationCtrl.modifyReservation)
 

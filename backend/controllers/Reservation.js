@@ -1,14 +1,15 @@
-const  express = require("express")
+const express = require("express")
 const router = express.Router()
-const reservation = require("../models/Reservation")
+const Reservation = require("../models/Reservation")
+
 
 
 exports.createReservation = (request, response)=>{
-    const reservation = new reservation({
-        dateReservation: request.body.dateReservation,
+    const reservation = new Reservation({
         client: request.body.client,
-        festivalDay: request.body.festivalDay,
-
+        dateReservation: request.body.dateReservation,
+        oneDay: request.body.oneDay,
+        twooDay: request.body.twooDay
     })
     reservation.save()
         .then(()=>{
@@ -20,8 +21,8 @@ exports.createReservation = (request, response)=>{
 }
 
 
-exports.getOneReservation = (request, response)=>{
-    reservation.findOne({_id:request.params.id})
+exports.showReservation = (request, response)=>{
+    Reservation.find({client :request.params.client})
         .then((festivalDay)=>{
             response.status(200).json(festivalDay)})
         .catch((error)=>{
@@ -29,13 +30,13 @@ exports.getOneReservation = (request, response)=>{
 }
 
 exports.modifyReservation = (request,response)=>{
-    const reservation_ = new reservation({
+    const reservation_ = new Reservation({
         _id: request.params.id,
-        ateReservation: request.body.dateReservation,
+        dateReservation: request.body.dateReservation,
         client: request.body.client,
         festivalDay: request.body.festivalDay,
     })
-    reservation.updateOne({_id:request.params.id}, reservation_)
+    Reservation.updateOne({_id:request.params.id}, reservation_)
     .then(()=>{
         response.status(201).json({message:"Person updated successfully !"})})
     .catch((error)=>{
@@ -43,7 +44,7 @@ exports.modifyReservation = (request,response)=>{
 }
 
 exports.deleteReservation = (request, response)=>{
-    Client.deleteOne({_id:request.params.id})
+    Reservation.deleteOne({_id:request.params.id})
         .then(()=>{
             response.status(200).json({message:"Deleted !"})
         })

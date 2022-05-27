@@ -22,3 +22,7 @@
     color:rgba(38, 35, 182, 0.87);
     font-weight: bold;
 }
+
+.dropdown{
+    margin: 20px 20px 5px 20px;
+}
